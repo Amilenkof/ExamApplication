@@ -1,7 +1,6 @@
-package Model;
+package com.coursework2.Model;
 
 import java.util.Collection;
-import java.util.Collections;
 
 public interface QuestionService {
 

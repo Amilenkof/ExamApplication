@@ -1,6 +1,7 @@
-package Model;
+package com.coursework2.Model;
 
 import java.util.Collection;
+import java.util.Objects;
 
 public class Question {
   private   String question;
@@ -27,4 +28,16 @@ public class Question {
     this.answer = answer;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Question question1 = (Question) o;
+    return question.equals(question1.question) && answer.equals(question1.answer);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(question, answer);
+  }
 }
