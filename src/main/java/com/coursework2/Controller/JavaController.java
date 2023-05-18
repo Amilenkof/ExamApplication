@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/exam/java")
@@ -34,6 +35,11 @@ public class JavaController {
                            @RequestParam("answer") String answer) {
         Question question1 = new Question(question, answer);
         return javaQuestionService.remove(question1);
+    }
+    @GetMapping("/find")
+    public Optional find (@RequestParam("question") String question,
+                          @RequestParam("answer") String answer) {
+       return javaQuestionService.find(question, answer);
     }
 }
 

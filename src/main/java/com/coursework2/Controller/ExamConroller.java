@@ -14,7 +14,7 @@ public class ExamConroller {
     public ExamConroller(ExaminerServiceImpl examinerService) {
         this.examinerService = examinerService;
     }
-    @GetMapping("/exam")
+    @GetMapping(value = "/exam/get", params = "amount")
     public HashSet <Question> getQuestions (int amount) {
         return examinerService.getQuestions(amount);
     }

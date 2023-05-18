@@ -7,11 +7,7 @@ import com.coursework2.Model.Question;
 import com.coursework2.Model.QuestionService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Service
 public class JavaQuestionService implements QuestionService {
@@ -45,6 +41,14 @@ public class JavaQuestionService implements QuestionService {
             questions.remove(question);
             return question;
         } else throw new ArrayIsNotContainsQuestion("Arraylist is not contains this element");
+    }
+@Override
+    public Optional<Question> find(String question, String answer) {
+        Question q = new Question(question, answer);
+        return Optional.ofNullable(questions.stream()
+                .filter(e -> questions.contains(q))
+                .findAny()
+                .orElseThrow(() -> new ArrayIsNotContainsQuestion("This Questions is not found")));
     }
 
     @Override
