@@ -1,0 +1,5 @@
+GET http://localhost:8080/exam/java/add?question=FirstQuestion&answer=FirstAnswer
+;
+
+
+GET http://localhost:8080/exam/java/add?question=SecondQuestion&answer=SecondAnswer

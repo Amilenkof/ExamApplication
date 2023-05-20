@@ -26,14 +26,13 @@ public class ExaminerServiceImpl implements ExaminerService {
             throw new ArrayNotHaveSoMuch("Arraylist with questions not have so much ");
         HashSet<Question> randomQuestion = new HashSet<>();
         Question q;
-//        questionService.getAll().stream()
-//                .filter(e->!randomQuestion.contains(e) && randomQuestion.size()<amount)
-//                .forEach(randomQuestion::add);
+
         while (randomQuestion.size()<amount) {
             q= questionService.getRandomQuestion();
             if (!randomQuestion.contains(q)) {
                 randomQuestion.add(q);
             }
+
         }
 
         return randomQuestion;

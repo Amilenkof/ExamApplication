@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+
+
 @Service
 public class JavaQuestionService implements QuestionService {
     private ArrayList<Question> questions;
@@ -46,7 +48,7 @@ public class JavaQuestionService implements QuestionService {
     public Optional<Question> find(String question, String answer) {
         Question q = new Question(question, answer);
         return Optional.ofNullable(questions.stream()
-                .filter(e -> questions.contains(q))
+                .filter(e -> e.equals(q))
                 .findAny()
                 .orElseThrow(() -> new ArrayIsNotContainsQuestion("This Questions is not found")));
     }
@@ -59,9 +61,13 @@ public class JavaQuestionService implements QuestionService {
     @Override
     public Question getRandomQuestion() {
         Random random = new Random();
-        if (questions.size() > 0)
-            return questions.get(random.nextInt(questions.size()));
-        else throw new ArrayIsEmptyException("Arraylist is Empty");
+//        if (questions.size() > 0)
+//            return questions.get(random.nextInt(questions.size()));
+//        else throw new ArrayIsEmptyException("Arraylist is Empty");
+         return questions.stream()
+                .skip(random.nextInt(questions.size()-1))
+                .findFirst()
+                .orElseThrow(()->new ArrayIsEmptyException("Array is Empty"));
     }
 
 }
