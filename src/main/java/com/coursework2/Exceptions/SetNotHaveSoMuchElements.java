@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class ArrayNotHaveSoMuch extends RuntimeException {
-    public ArrayNotHaveSoMuch(String message) {
+public class SetNotHaveSoMuchElements extends RuntimeException {
+    public SetNotHaveSoMuchElements(String message) {
         super(message);
     }
 }

@@ -8,12 +8,11 @@ import com.coursework2.Model.QuestionService;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-
 @Service
-public class JavaQuestionService implements QuestionService {
+public class MathQuestionService implements QuestionService {
     private final Set<Question> questions;
 
-    public JavaQuestionService() {
+    public MathQuestionService() {
         this.questions = new HashSet<>();
     }
 
@@ -42,7 +41,7 @@ public class JavaQuestionService implements QuestionService {
             return question;
         } else throw new ArrayIsNotContainsQuestion("Arraylist is not contains this element");
     }
-@Override
+    @Override
     public Optional<Question> find(String question, String answer) {
         Question q = new Question(question, answer);
         return Optional.ofNullable(questions.stream()
@@ -62,7 +61,7 @@ public class JavaQuestionService implements QuestionService {
 
 
         if (questions.size() > 0){
-          return   questions.stream()
+            return   questions.stream()
                     .skip(random.nextInt(questions.size()))
                     .findAny()
                     .get();
