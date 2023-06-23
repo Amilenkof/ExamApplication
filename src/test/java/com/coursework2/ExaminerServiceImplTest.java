@@ -42,9 +42,12 @@ public class ExaminerServiceImplTest {
 
     @Test
     public void getQuestionPositiveTest() {
-        Mockito.when(javaQuestionService.getRandomQuestion()).thenReturn(new Question("Вопрос", "Ответ"));
-        Assertions.assertEquals((new Question("Вопрос", "Ответ")),examinerServiceImpl.getQuestions(1));
+        questionSet.add(question);
+
+        Mockito.when(javaQuestionService.getAll()).thenReturn(questionSet);
+        Mockito.when(mathQuestionService.getAll()).thenReturn(questionSet);
+        Mockito.when(javaQuestionService.getRandomQuestion()).thenReturn(question);
+//        Mockito.when(mathQuestionService.getRandomQuestion()).thenReturn(question);
+        Assertions.assertEquals(questionSet,examinerServiceImpl.getQuestions(1));
     }
 }
-
-

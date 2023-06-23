@@ -21,7 +21,7 @@ GET http://localhost:8080/exam/java/add?question=Назовите примити
 GET http://localhost:8080/exam/java
 
 
-###получения рандомного списка с вопросами- амоунт нужное колво вопросов
+###получения рандомного списка с вопросами по java или математике- амоунт нужное колво вопросов
 GET http://localhost:8080/exam/get?amount=12
 
 
