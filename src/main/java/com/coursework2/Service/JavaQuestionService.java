@@ -1,8 +1,8 @@
 package com.coursework2.Service;
 
-import com.coursework2.Exceptions.ArrayAlreadyHaveThisQuestion;
-import com.coursework2.Exceptions.ArrayIsEmptyException;
-import com.coursework2.Exceptions.ArrayIsNotContainsQuestion;
+import com.coursework2.Exceptions.SetAlreadyHaveThisQuestion;
+import com.coursework2.Exceptions.SetIsEmptyException;
+import com.coursework2.Exceptions.SetIsNotContainsQuestion;
 import com.coursework2.Model.Question;
 import com.coursework2.Model.QuestionService;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class JavaQuestionService implements QuestionService {
         if (!questions.contains(q)) {
             questions.add(q);
             return q;
-        } else throw new ArrayAlreadyHaveThisQuestion("Arraylist already have this question");
+        } else throw new SetAlreadyHaveThisQuestion("Arraylist already have this question");
     }
 
     @Override
@@ -31,7 +31,7 @@ public class JavaQuestionService implements QuestionService {
         if (!questions.contains(question)) {
             questions.add(question);
             return question;
-        } else throw new ArrayAlreadyHaveThisQuestion("Arraylist already have this question");
+        } else throw new SetAlreadyHaveThisQuestion("Arraylist already have this question");
     }
 
     @Override
@@ -40,7 +40,7 @@ public class JavaQuestionService implements QuestionService {
         if (b) {
             questions.remove(question);
             return question;
-        } else throw new ArrayIsNotContainsQuestion("Arraylist is not contains this element");
+        } else throw new SetIsNotContainsQuestion("Arraylist is not contains this element");
     }
 @Override
     public Optional<Question> find(String question, String answer) {
@@ -48,7 +48,7 @@ public class JavaQuestionService implements QuestionService {
         return Optional.ofNullable(questions.stream()
                 .filter(e -> questions.contains(q))
                 .findAny()
-                .orElseThrow(() -> new ArrayIsNotContainsQuestion("This Questions is not found")));
+                .orElseThrow(() -> new SetIsNotContainsQuestion("This Questions is not found")));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class JavaQuestionService implements QuestionService {
                     .get();
         }
 //            return questions.get(random.nextInt(questions.size()));
-        else throw new ArrayIsEmptyException("Arraylist is Empty");
+        else throw new SetIsEmptyException("Arraylist is Empty");
     }
 
 }

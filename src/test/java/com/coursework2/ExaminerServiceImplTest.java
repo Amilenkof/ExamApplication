@@ -16,31 +16,34 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.same;
 
 @ExtendWith(MockitoExtension.class)
 public class ExaminerServiceImplTest {
     @Mock
-    private QuestionService questionServiceTest;
+    private QuestionService questionService;
     @InjectMocks
     private ExaminerServiceImpl examinerServiceImpl;
+
+    private Set<Question> questionSet = new HashSet<>();
+    private Question question = new Question("Вопрос", "Ответ");
+
 
 
 
 
     @Test
     public void getQuestionsNegativeTest() {
-        Mockito.when(examinerServiceImpl.getQuestions(any())).thenThrow(SetNotHaveSoMuchElements.class);
         Assertions.assertThrows(SetNotHaveSoMuchElements.class, () -> examinerServiceImpl.getQuestions(100500));
     }
 @Test
     public void getQuestionPositiveTest(){
-    Mockito.when(examinerServiceImpl.getQuestions(any())).thenReturn(questionServiceTest);
+    questionSet.add(question);
 
+    Mockito.when(questionService.getAll()).thenReturn(questionSet);
+    Mockito.when(questionService.getRandomQuestion()).thenReturn(new Question("Вопрос", "Ответ"));
+    Assertions.assertEquals(questionSet,examinerServiceImpl.getQuestions(1));
 
-    questionServiceTest.add(new Question("1", "1"));
-    Set<Question> set = new HashSet<>();
-    set.add(new Question("1", "1"));
-    Assertions.assertEquals(set,examinerServiceImpl.getQuestions(1));
 }
 }
 

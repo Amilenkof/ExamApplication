@@ -1,11 +1,10 @@
 package com.coursework2;
 
-import com.coursework2.Exceptions.ArrayAlreadyHaveThisQuestion;
-import com.coursework2.Exceptions.ArrayIsEmptyException;
-import com.coursework2.Exceptions.ArrayIsNotContainsQuestion;
+import com.coursework2.Exceptions.SetAlreadyHaveThisQuestion;
+import com.coursework2.Exceptions.SetIsEmptyException;
+import com.coursework2.Exceptions.SetIsNotContainsQuestion;
 import com.coursework2.Model.Question;
 import com.coursework2.Service.JavaQuestionService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -45,7 +44,7 @@ public class JavaQuestionServiceTest {
     @Test
     public void addTestThrows() {
         javaQuestionService.add(question1);
-        assertThrows(ArrayAlreadyHaveThisQuestion.class, () -> javaQuestionService.add(question1));
+        assertThrows(SetAlreadyHaveThisQuestion.class, () -> javaQuestionService.add(question1));
     }
 
 
@@ -53,7 +52,7 @@ public class JavaQuestionServiceTest {
     public void removeTests() {
 
         //throwTest
-        assertThrows(ArrayIsNotContainsQuestion.class, () -> javaQuestionService.remove(question1));
+        assertThrows(SetIsNotContainsQuestion.class, () -> javaQuestionService.remove(question1));
         //2testPositive
         javaQuestionService.add(question1);
         assertEquals(question1, javaQuestionService.remove(question1));
@@ -68,7 +67,7 @@ public class JavaQuestionServiceTest {
     public void findTests() {
 
         //throwTest
-        assertThrows(ArrayIsNotContainsQuestion.class, () -> javaQuestionService.find(question1.getQuestion(), question1.getAnswer()));
+        assertThrows(SetIsNotContainsQuestion.class, () -> javaQuestionService.find(question1.getQuestion(), question1.getAnswer()));
         //test2
         javaQuestionService.add(question1);
         assertEquals(question1, javaQuestionService.find(question1.getQuestion(), question1.getAnswer()).get());
@@ -89,7 +88,7 @@ public class JavaQuestionServiceTest {
     @Test
     public void getRandomTests() {
         //testThrows
-        assertThrows(ArrayIsEmptyException.class,()-> javaQuestionService.getRandomQuestion());
+        assertThrows(SetIsEmptyException.class,()-> javaQuestionService.getRandomQuestion());
         //testPositive
         javaQuestionService.add(question1);
         assertEquals(question1,javaQuestionService.getRandomQuestion());
