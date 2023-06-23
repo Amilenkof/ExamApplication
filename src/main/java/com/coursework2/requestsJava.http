@@ -1,0 +1,30 @@
+###наполние вопросами по java
+### вопрос 1
+GET http://localhost:8080/exam/java/add?question=Что такое string-pool?&answer=string-pool — структура в памяти, хранящая массив всех строк-литералов программы.
+### вопрос 2
+GET http://localhost:8080/exam/java/add?question=Сравнение по == и по equals (*)?&answer=Сравнение по "==" — сравнение по ссылкам ,Сравнение по «equals» — если переопределен equals, то это сравнение эквивалентности объектов по их полям, если нет — по ссылкам на объекты
+### вопрос 3
+GET http://localhost:8080/exam/java/add?question=что такое массив?&answer=структура данных в имеющая фиксированную длину
+### вопрос 4
+GET http://localhost:8080/exam/java/add?question=Сollections- класс или интерфейс?&answer=класс
+### вопрос 5
+GET http://localhost:8080/exam/java/add?question=Наследование это- ?&answer=механизм, который позволяет создавать классы на основе других классов
+### вопрос 6
+GET http://localhost:8080/exam/java/add?question=Назовите принципы ООП?&answer=Наследование, Полиморфизм, Инкапсуляция
+### вопрос 7
+GET http://localhost:8080/exam/java/add?question=Что такое модификаторы доступа?&answer=о ключевые слова, которые регулируют уровень доступа к разным частям твоего кода.
+### вопрос 8
+GET http://localhost:8080/exam/java/add?question=Назовите примитивные типы данных &answer=int,double,short,float,long,byte,char..
+
+
+### Получение списка всех вопросов по JAVA
+GET http://localhost:8080/exam/java
+
+
+###получения рандомного списка с вопросами- амоунт нужное колво вопросов
+GET http://localhost:8080/exam/get?amount=4
+
+###find
+GET http://localhost:8080/exam/java/find?question=Назовите примитивные типы данных &answer=int,double,short,float,long,byte,char..
+###findWrong
+GET http://localhost:8080/exam/java/find?question=1Назовите примитивные типы данных &answer=int,double,short,float,long,byte,char..
