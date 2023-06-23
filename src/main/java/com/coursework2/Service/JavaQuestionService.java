@@ -5,55 +5,50 @@ import com.coursework2.Exceptions.ArrayIsEmptyException;
 import com.coursework2.Exceptions.ArrayIsNotContainsQuestion;
 import com.coursework2.Model.Question;
 import com.coursework2.Model.QuestionService;
+import com.coursework2.Repository.JavaQuestionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class JavaQuestionService implements QuestionService {
-    private final Set<Question> questions;
+    private JavaQuestionRepository javaQuestionRepository;
 
-    public JavaQuestionService() {
-        this.questions = new HashSet<>();
+    public JavaQuestionService(JavaQuestionRepository javaQuestionRepository) {
+        this.javaQuestionRepository = javaQuestionRepository;
     }
 
     @Override
     public Question add(String question, String answer) {
         Question q = new Question(question, answer);
-        if (!questions.contains(q)) {
-            questions.add(q);
+        if (!javaQuestionRepository.getAll().contains(q)) {
+            javaQuestionRepository.add(q);
             return q;
-        } else throw new ArrayAlreadyHaveThisQuestion("Arraylist already have this question");
+        } else throw new ArrayAlreadyHaveThisQuestion("Set already have this question");
     }
 
     @Override
     public Question add(Question question) {
-        if (!questions.contains(question)) {
-            questions.add(question);
-            return question;
-        } else throw new ArrayAlreadyHaveThisQuestion("Arraylist already have this question");
+        return javaQuestionRepository.add(question);
     }
 
     @Override
     public Question remove(Question question) {
-        boolean b = questions.contains(question);
-        if (b) {
-            questions.remove(question);
-            return question;
-        } else throw new ArrayIsNotContainsQuestion("Arraylist is not contains this element");
+        return javaQuestionRepository.remove(question);
     }
-@Override
+
+    @Override
     public Optional<Question> find(String question, String answer) {
         Question q = new Question(question, answer);
-        return Optional.ofNullable(questions.stream()
-                .filter(e -> questions.contains(q))
+        return Optional.ofNullable(javaQuestionRepository.getAll().stream()
+                .filter(e -> javaQuestionRepository.getAll().contains(q))
                 .findAny()
                 .orElseThrow(() -> new ArrayIsNotContainsQuestion("This Questions is not found")));
     }
 
     @Override
     public Collection<Question> getAll() {
-        return questions;
+        return javaQuestionRepository.getAll();
     }
 
     @Override
@@ -61,14 +56,14 @@ public class JavaQuestionService implements QuestionService {
         Random random = new Random();
 
 
-        if (questions.size() > 0){
-          return   questions.stream()
-                    .skip(random.nextInt(questions.size()))
+        if (javaQuestionRepository.getAll().size() > 0) {
+            return javaQuestionRepository.getAll().stream()
+                    .skip(random.nextInt(javaQuestionRepository.getAll().size()))
                     .findAny()
                     .get();
         }
 //            return questions.get(random.nextInt(questions.size()));
-        else throw new ArrayIsEmptyException("Arraylist is Empty");
+        else throw new ArrayIsEmptyException("Set is Empty");
     }
 
 }

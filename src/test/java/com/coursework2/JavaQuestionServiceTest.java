@@ -4,6 +4,7 @@ import com.coursework2.Exceptions.ArrayAlreadyHaveThisQuestion;
 import com.coursework2.Exceptions.ArrayIsEmptyException;
 import com.coursework2.Exceptions.ArrayIsNotContainsQuestion;
 import com.coursework2.Model.Question;
+import com.coursework2.Repository.JavaQuestionRepository;
 import com.coursework2.Service.JavaQuestionService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,13 +14,14 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JavaQuestionServiceTest {
-    private JavaQuestionService javaQuestionService = new JavaQuestionService();
-    private Collection<Question> list = new ArrayList<>();
+    private JavaQuestionService javaQuestionService = new JavaQuestionService(new JavaQuestionRepository());
+    private Collection<Question> list = new HashSet<>();
     private Question question1 = new Question("Вопрос1", "Ответ1");
     private Question question2 = new Question("Вопрос2", "Ответ2");
 
