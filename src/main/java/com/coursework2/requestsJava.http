@@ -22,7 +22,8 @@ GET http://localhost:8080/exam/java
 
 
 ###получения рандомного списка с вопросами- амоунт нужное колво вопросов
-GET http://localhost:8080/exam/get?amount=4
+GET http://localhost:8080/exam/get?amount=12
+
 
 ###find
 GET http://localhost:8080/exam/java/find?question=Назовите примитивные типы данных &answer=int,double,short,float,long,byte,char..

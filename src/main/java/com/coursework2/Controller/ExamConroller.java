@@ -5,7 +5,9 @@ import com.coursework2.Service.ExaminerServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 public class ExamConroller {
@@ -15,7 +17,7 @@ public class ExamConroller {
         this.examinerService = examinerService;
     }
     @GetMapping(value = "/get", params = "amount")
-    public HashSet <Question> getQuestions (int amount) {
+    public Set<Question> getQuestions (int amount) {
         return examinerService.getQuestions(amount);
     }
 }

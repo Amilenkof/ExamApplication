@@ -1,7 +1,7 @@
 package com.coursework2.Repository;
 
-import com.coursework2.Exceptions.ArrayAlreadyHaveThisQuestion;
-import com.coursework2.Exceptions.ArrayIsNotContainsQuestion;
+import com.coursework2.Exceptions.SetAlreadyHaveThisQuestion;
+import com.coursework2.Exceptions.SetIsNotContainsQuestion;
 import com.coursework2.Model.Question;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
@@ -38,7 +38,7 @@ public class JavaQuestionRepository implements QuestionRepository{
         if (!javaRepository.contains(question)) {
             javaRepository.add(question);
             return question;
-        } else throw new ArrayAlreadyHaveThisQuestion("Set already have this question");
+        } else throw new SetAlreadyHaveThisQuestion("Set already have this question");
     }
 
     @Override
@@ -47,7 +47,7 @@ public class JavaQuestionRepository implements QuestionRepository{
         if (b) {
             javaRepository.remove(question);
             return question;
-        } else throw new ArrayIsNotContainsQuestion("Set is not contains this element");
+        } else throw new SetIsNotContainsQuestion("Set is not contains this element");
     }
 
     @Override

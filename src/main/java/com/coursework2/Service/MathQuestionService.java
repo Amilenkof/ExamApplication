@@ -1,8 +1,8 @@
 package com.coursework2.Service;
 
-import com.coursework2.Exceptions.ArrayAlreadyHaveThisQuestion;
-import com.coursework2.Exceptions.ArrayIsEmptyException;
-import com.coursework2.Exceptions.ArrayIsNotContainsQuestion;
+import com.coursework2.Exceptions.SetAlreadyHaveThisQuestion;
+import com.coursework2.Exceptions.SetIsEmptyException;
+import com.coursework2.Exceptions.SetIsNotContainsQuestion;
 import com.coursework2.Model.Question;
 import com.coursework2.Model.QuestionService;
 import com.coursework2.Repository.MathQuestionRepository;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 @Service
 public class MathQuestionService implements QuestionService {
-    private MathQuestionRepository mathQuestionRepository;
+    private final MathQuestionRepository mathQuestionRepository;
 
     public MathQuestionService(MathQuestionRepository javaQuestionRepository) {
         this.mathQuestionRepository = javaQuestionRepository;
@@ -19,11 +19,8 @@ public class MathQuestionService implements QuestionService {
 
     @Override
     public Question add(String question, String answer) {
-        Question q = new Question(question, answer);
-        if (!mathQuestionRepository.getAll().contains(q)) {
-            mathQuestionRepository.add(q);
-            return q;
-        } else throw new ArrayAlreadyHaveThisQuestion("Set already have this question");
+            return  mathQuestionRepository.add(new Question(question,answer));
+
     }
 
     @Override
@@ -42,7 +39,7 @@ public class MathQuestionService implements QuestionService {
         return Optional.ofNullable(mathQuestionRepository.getAll().stream()
                 .filter(e -> mathQuestionRepository.getAll().contains(q))
                 .findAny()
-                .orElseThrow(() -> new ArrayIsNotContainsQuestion("This Questions is not found")));
+                .orElseThrow(() -> new SetIsNotContainsQuestion("This Question is not found")));
     }
 
     @Override
@@ -53,16 +50,13 @@ public class MathQuestionService implements QuestionService {
     @Override
     public Question getRandomQuestion() {
         Random random = new Random();
-
-
         if (mathQuestionRepository.getAll().size() > 0) {
             return mathQuestionRepository.getAll().stream()
                     .skip(random.nextInt(mathQuestionRepository.getAll().size()))
                     .findAny()
                     .get();
         }
-//            return questions.get(random.nextInt(questions.size()));
-        else throw new ArrayIsEmptyException("Set is Empty");
+        else throw new SetIsEmptyException("Set is Empty");
     }
 
 }

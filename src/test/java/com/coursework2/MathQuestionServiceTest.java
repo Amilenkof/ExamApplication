@@ -1,101 +1,90 @@
 package com.coursework2;
 
-import com.coursework2.Exceptions.ArrayAlreadyHaveThisQuestion;
-import com.coursework2.Exceptions.ArrayIsEmptyException;
-import com.coursework2.Exceptions.ArrayIsNotContainsQuestion;
+import com.coursework2.Exceptions.SetAlreadyHaveThisQuestion;
+import com.coursework2.Exceptions.SetIsEmptyException;
+import com.coursework2.Exceptions.SetIsNotContainsQuestion;
 import com.coursework2.Model.Question;
 import com.coursework2.Repository.MathQuestionRepository;
 import com.coursework2.Service.MathQuestionService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockingDetails;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.stream.Stream;
+import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 
+@ExtendWith(MockitoExtension.class)
 public class MathQuestionServiceTest {
-    private final MathQuestionService mathQuestionService = new MathQuestionService(new MathQuestionRepository());
-    private  final Collection<Question> list = new HashSet<>();
-    private final Question question1 = new Question("Вопрос1", "Ответ1");
-    private final Question question2 = new Question("Вопрос2", "Ответ2");
+    @Mock
+    private  MathQuestionRepository mathQuestionRepository;
 
-    public static Stream<Arguments> paramsForTests() {
-        Question question1 = new Question("Вопрос1", "Ответ1");
-        Question question2 = new Question("Вопрос2", "Ответ2");
+    @InjectMocks
+    private MathQuestionService mathQuestionService;
+
+    private  final Question question = new Question("Вопрос", "Ответ");
 
 
-        return Stream.of(
-                Arguments.of(question1, question1),
-                Arguments.of(question2, question2)
-
-        );
-
-    }
-
-    @ParameterizedTest
-    @MethodSource("paramsForTests")
-    public void addTests(Question in, Question out) {
-        assertEquals(in, out);
-    }
 
     @Test
-    public void addTestThrows() {
-        mathQuestionService.add(question1);
-        assertThrows(ArrayAlreadyHaveThisQuestion.class, () -> mathQuestionService.add(question1));
+    public void addTests() {
+        Mockito.when(mathQuestionService.add(question)).thenReturn(question);
+        Assertions.assertEquals(question,mathQuestionService.add("Вопрос","Ответ"));
+
+        Mockito.when(mathQuestionService.add("Вопрос","Ответ")).thenReturn(question);
+        Assertions.assertEquals(question,mathQuestionService.add(question));
+
+        Mockito.when(mathQuestionService.add(any())).thenThrow(SetAlreadyHaveThisQuestion.class);
+        Assertions.assertThrows(SetAlreadyHaveThisQuestion.class, () -> mathQuestionService.add(any()));
     }
-
-
     @Test
     public void removeTests() {
 
-        //throwTest
-        assertThrows(ArrayIsNotContainsQuestion.class, () -> mathQuestionService.remove(question1));
-        //2testPositive
-        mathQuestionService.add(question1);
-        assertEquals(question1, mathQuestionService.remove(question1));
-        //3testCheckSize
-        mathQuestionService.add(question1);
-        int sizeWithOneElement = mathQuestionService.getAll().size();
-        mathQuestionService.remove(question1);
-        assertEquals(sizeWithOneElement - 1, mathQuestionService.getAll().size());
-    }
 
-    @Test
-    public void findTests() {
+        Mockito.when(mathQuestionService.remove(question)).thenReturn(question);
+        Assertions.assertEquals(question,mathQuestionService.remove(question));
 
-        //throwTest
-        assertThrows(ArrayIsNotContainsQuestion.class, () -> mathQuestionService.find(question1.getQuestion(), question1.getAnswer()));
-        //test2
-        mathQuestionService.add(question1);
-        assertEquals(question1, mathQuestionService.find(question1.getQuestion(), question1.getAnswer()).get());
-
+        Mockito.when(mathQuestionService.remove(any())).thenThrow(SetIsNotContainsQuestion.class);
+        Assertions.assertThrows(SetIsNotContainsQuestion.class, () -> mathQuestionService.remove(any()));
     }
 
 
     @Test
     public void getAllTests() {
-        list.add(question1);
-        list.add(question2);
-        mathQuestionService.add(question1);
-        mathQuestionService.add(question2);
-        assertEquals(list, mathQuestionService.getAll());
+        Set<Question> set = new HashSet<>();
+        set.add(question);
+        Mockito.when(mathQuestionRepository.getAll()).thenReturn(set);
+        Assertions.assertEquals(set,mathQuestionService.getAll());
     }
 
+    @Test
+    public void getRandomQuestionsTest() {
+        Assertions.assertThrows(SetIsEmptyException.class, () -> mathQuestionService.getRandomQuestion());
+
+
+        Set<Question> set = new HashSet<>();
+        set.add(question);
+        Mockito.when(mathQuestionRepository.getAll()).thenReturn(set);
+        Assertions.assertEquals(question, mathQuestionService.getRandomQuestion());
+
+    }
 
     @Test
-    public void getRandomTests() {
-        //testThrows
-        assertThrows(ArrayIsEmptyException.class, mathQuestionService::getRandomQuestion);
-        //testPositive
-        mathQuestionService.add(question1);
-        assertEquals(question1, mathQuestionService.getRandomQuestion());
+    public void findTests(){
+        Assertions.assertThrows(SetIsNotContainsQuestion.class, () -> mathQuestionService.find("вопрос","ответ"));
+
+
+        Set<Question> set = new HashSet<>();
+        set.add(question);
+        Mockito.when(mathQuestionRepository.getAll()).thenReturn(set);
+        Assertions.assertEquals(question, (mathQuestionService.find("Вопрос", "Ответ")).get());
 
     }
 }
-
-

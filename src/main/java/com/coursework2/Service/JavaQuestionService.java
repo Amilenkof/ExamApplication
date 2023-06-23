@@ -1,8 +1,8 @@
 package com.coursework2.Service;
 
-import com.coursework2.Exceptions.ArrayAlreadyHaveThisQuestion;
-import com.coursework2.Exceptions.ArrayIsEmptyException;
-import com.coursework2.Exceptions.ArrayIsNotContainsQuestion;
+import com.coursework2.Exceptions.SetAlreadyHaveThisQuestion;
+import com.coursework2.Exceptions.SetIsEmptyException;
+import com.coursework2.Exceptions.SetIsNotContainsQuestion;
 import com.coursework2.Model.Question;
 import com.coursework2.Model.QuestionService;
 import com.coursework2.Repository.JavaQuestionRepository;
@@ -12,7 +12,7 @@ import java.util.*;
 
 @Service
 public class JavaQuestionService implements QuestionService {
-    private JavaQuestionRepository javaQuestionRepository;
+    private final JavaQuestionRepository javaQuestionRepository;
 
     public JavaQuestionService(JavaQuestionRepository javaQuestionRepository) {
         this.javaQuestionRepository = javaQuestionRepository;
@@ -20,11 +20,7 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question add(String question, String answer) {
-        Question q = new Question(question, answer);
-        if (!javaQuestionRepository.getAll().contains(q)) {
-            javaQuestionRepository.add(q);
-            return q;
-        } else throw new ArrayAlreadyHaveThisQuestion("Set already have this question");
+            return javaQuestionRepository.add(new Question(question,answer));
     }
 
     @Override
@@ -43,7 +39,7 @@ public class JavaQuestionService implements QuestionService {
         return Optional.ofNullable(javaQuestionRepository.getAll().stream()
                 .filter(e -> javaQuestionRepository.getAll().contains(q))
                 .findAny()
-                .orElseThrow(() -> new ArrayIsNotContainsQuestion("This Questions is not found")));
+                .orElseThrow(() -> new SetIsNotContainsQuestion("This Questions is not found")));
     }
 
     @Override
@@ -62,8 +58,7 @@ public class JavaQuestionService implements QuestionService {
                     .findAny()
                     .get();
         }
-//            return questions.get(random.nextInt(questions.size()));
-        else throw new ArrayIsEmptyException("Set is Empty");
+        else throw new SetIsEmptyException("Set is Empty");
     }
 
 }
