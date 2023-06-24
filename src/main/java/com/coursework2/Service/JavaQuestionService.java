@@ -13,6 +13,7 @@ import java.util.*;
 @Service
 public class JavaQuestionService implements QuestionService {
     private final JavaQuestionRepository javaQuestionRepository;
+    private final Random random = new Random();
 
     public JavaQuestionService(JavaQuestionRepository javaQuestionRepository) {
         this.javaQuestionRepository = javaQuestionRepository;
@@ -20,7 +21,7 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question add(String question, String answer) {
-            return javaQuestionRepository.add(new Question(question,answer));
+        return javaQuestionRepository.add(new Question(question, answer));
     }
 
     @Override
@@ -49,16 +50,12 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question getRandomQuestion() {
-        Random random = new Random();
-
-
         if (javaQuestionRepository.getAll().size() > 0) {
             return javaQuestionRepository.getAll().stream()
                     .skip(random.nextInt(javaQuestionRepository.getAll().size()))
                     .findAny()
                     .get();
-        }
-        else throw new SetIsEmptyException("Set is Empty");
+        } else throw new SetIsEmptyException("Set is Empty");
     }
 
 }

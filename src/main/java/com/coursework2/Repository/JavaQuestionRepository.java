@@ -38,7 +38,7 @@ public class JavaQuestionRepository implements QuestionRepository{
         if (!javaRepository.contains(question)) {
             javaRepository.add(question);
             return question;
-        } else throw new SetAlreadyHaveThisQuestion("Set already have this question");
+        }  throw new SetAlreadyHaveThisQuestion("Set already have this question");
     }
 
     @Override

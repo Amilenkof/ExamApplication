@@ -24,14 +24,11 @@ public class ExaminerServiceImpl implements ExaminerService {
         if (amount > (javaQuestionService.getAll().size() + mathQuestionService.getAll().size()))
             throw new SetNotHaveSoMuchElements("Set with questions not have so much elements");
         HashSet<Question> randomQuestion = new HashSet<>();
-        Question q;
-        QuestionService questionService=javaQuestionService;
-
         while (randomQuestion.size()<amount) {
-            double temp = Math.random();
-            if (temp > 0.5) questionService = mathQuestionService;
-            q= questionService.getRandomQuestion();
-                randomQuestion.add(q);
+            if (Math.random() > 0.5) {
+                randomQuestion.add(javaQuestionService.getRandomQuestion());}
+            else {
+                randomQuestion.add(mathQuestionService.getRandomQuestion());}
         }
         return randomQuestion;
 
