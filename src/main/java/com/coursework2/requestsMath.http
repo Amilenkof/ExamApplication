@@ -1,0 +1,30 @@
+###наполние вопросами по java
+### вопрос 1
+GET http://localhost:8080/exam/math/add?question=Как называется сотая часть числа&answer=Процент
+### вопрос 2
+GET http://localhost:8080/exam/math/add?question=Место, занимаемое цифрой и записи числа&answer=разряд
+### вопрос 3
+GET http://localhost:8080/exam/math/add?question=Цифровой знак, обозначающий отсутствие величины&answer=ноль
+### вопрос 4
+GET http://localhost:8080/exam/math/add?question=Сколько раз в году встает солнце&answer=365
+### вопрос 5
+GET http://localhost:8080/exam/math/add?question=На какое наибольшее целое число делится без остатка любое целое число&answer=само на себя
+### вопрос 6
+GET http://localhost:8080/exam/math/add?question=Имеет ли прямая линия концы&answer=нет
+### вопрос 7
+GET http://localhost:8080/exam/math/add?question=Сумма углов четырехугольника&answer=360
+### вопрос 8
+GET http://localhost:8080/exam/math/add?question=Назовите наибольшее отрицательное число&answer=-1
+
+
+### Получение списка всех вопросов по математике
+GET http://localhost:8080/exam/math
+
+
+###получения рандомного списка с вопросами по java или математике- амоунт нужное колво вопросов
+GET http://localhost:8080/exam/get?amount=4
+
+###find
+GET http://localhost:8080/exam/math/find?question=Назовите примитивные типы данных &answer=int,double,short,float,long,byte,char..
+###findWrong
+GET http://localhost:8080/exam/math/find?question=1Назовите примитивные типы данных &answer=int,double,short,float,long,byte,char..
