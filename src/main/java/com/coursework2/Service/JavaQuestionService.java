@@ -6,12 +6,14 @@ import com.coursework2.Exceptions.SetIsNotContainsQuestion;
 import com.coursework2.Model.Question;
 import com.coursework2.Model.QuestionService;
 import com.coursework2.Repository.JavaQuestionRepository;
+import com.coursework2.Repository.QuestionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class JavaQuestionService implements QuestionService {
+
     private final JavaQuestionRepository javaQuestionRepository;
     private final Random random = new Random();
 

@@ -4,7 +4,6 @@ import com.coursework2.Exceptions.SetAlreadyHaveThisQuestion;
 import com.coursework2.Exceptions.SetIsNotContainsQuestion;
 import com.coursework2.Model.Question;
 import com.coursework2.Repository.JavaQuestionRepository;
-import com.coursework2.Repository.MathQuestionRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
