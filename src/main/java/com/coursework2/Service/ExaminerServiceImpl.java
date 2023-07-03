@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
     private final List<QuestionService> questionServiceList;
-    private final int countQuestions;
+//    private final int countQuestions;
     private final Random random = new Random(723);
 
 
@@ -21,15 +21,15 @@ public class ExaminerServiceImpl implements ExaminerService {
         this.questionServiceList = new ArrayList<>();
         questionServiceList.add(javaQuestionService);
         questionServiceList.add(mathQuestionService);
-        countQuestions = javaQuestionService.getAll().size() + mathQuestionService.countSize();
+//        countQuestions = javaQuestionService.getAll().size() + mathQuestionService.countSize();
 
 
     }
 
     @Override
     public Set<Question> getQuestions(int amount) {
-        if (amount > countQuestions)
-            throw new SetNotHaveSoMuchElements("Set with questions not have so much elements");
+//        if (amount > countQuestions)
+//            throw new SetNotHaveSoMuchElements("Set with questions not have so much elements");
         HashSet<Question> randomQuestion = new HashSet<>();
         while (randomQuestion.size() < amount) {
             if (random.nextInt(0, 2) == 0) {
