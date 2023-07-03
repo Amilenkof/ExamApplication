@@ -1,0 +1,8 @@
+        mathRepository.add(new Question("Как называется сотая часть числа","ПРОЦЕНТ"));
+        mathRepository.add(new Question("Место, занимаемое цифрой и записи числа","разряд"));
+        mathRepository.add(new Question("Цифровой знак, обозначающий отсутствие величины","ноль"));
+        mathRepository.add(new Question("Сколько раз в году встает солнце","365"));
+        mathRepository.add(new Question("На какое наибольшее целое число делится без остатка любое целое число","само на себя"));
+        mathRepository.add(new Question("Имеет ли прямая линия концы","нет"));
+        mathRepository.add(new Question("Сумма углов четырехугольника","360"));
+        mathRepository.add(new Question("Назовите наибольшее отрицательное число","-1"));
